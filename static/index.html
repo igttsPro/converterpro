@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Compressor by IGTTS</title>
     <link rel="stylesheet" href="/static/style.css">
     <style>
@@ -13,25 +15,79 @@
         }
     </style>
 </head>
+
 <body>
+<!-- NAVBAR (full width, outside container) -->
+<header class="top-header">
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="#" class="nav-logo">
+            <img src="/static/images/logo.jpg" alt="Company Logo">
+        </a>
 
-<div class="container">
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <!-- VideoTools Dropdown -->
+            <li class="dropdown">
+                <a href="/">VideoTools &#9662;</a> <!-- ▼ symbol -->
+                <ul class="dropdown-menu">
+                    <li><a href="/">Compress Video</a></li>
+                    <li><a href="/">Split Video</a></li>
+                    <li><a href="/">Download Video</a></li>
+                    <li><a href="/">Remove VideoBground</a></li>
+                    <li><a href="/">Video Voice to Text</a></li>
+                </ul>
+            </li>
+
+            <!-- Image Tools -->
+            <li class="dropdown">
+                <a href="#">ImageTools &#9662;</a> <!-- ▼ symbol -->
+                <ul class="dropdown-menu">
+                    <li><a href="#">Remove ImageBground</a></li>
+                    <li><a href="#">Image to Text</a></li>
+                </ul>
+            </li>
+            <!-- Other Tools -->
+        </ul>
+
+        <!-- Profile Ring -->
+        <a href="#" class="profile-ring">
+            <svg viewBox="0 0 120 120" class="ring-text">
+                <defs>
+                    <path id="circlePath"
+                          d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+                </defs>
+                <text>
+                    <textPath href="#circlePath">
+                        Author • IGTTS Developer •
+                    </textPath>
+                </text>
+            </svg>
+            <img src="/static/images/profile.png" alt="Author Profile">
+        </a>
+    </nav>
+</header>
 
 
-<h2>Video Compressor PRO</h2>
+<main class="main-wrapper">
+    <div class="container">
 
-<input type="file" id="videos" multiple accept=".mp4"><br><br>
 
-<select id="codec">
-    <option value="libx264">igtts.264 (Fast)</option>
-    <!-- <option value="libx265">H.265 (Smaller)</option> -->
-</select><br><br>
+    <h2>Video Compressor PRO</h2>
 
-<button onclick="startCompression()">Compress</button>
+    <input type="file" id="videos" multiple accept=".mp4"><br><br>
 
-<div id="progress-container"></div>
-<h3>Downloads:</h3>
-<div id="downloads"></div>
+    <select id="codec">
+        <option value="libx264">igtts.264 (Fast)</option>
+        <!-- <option value="libx265">H.265 (Smaller)</option> -->
+    </select><br><br>
+
+    <button onclick="startCompression()">Compress</button>
+
+    <div id="progress-container"></div>
+    <h3>Downloads:</h3>
+    <div id="downloads"></div>
+</main>
 
 
 <footer class="app-footer">

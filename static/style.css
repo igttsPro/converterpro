@@ -9,9 +9,12 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+}
+
+.main-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
+    padding: 40px 15px;
 }
 
 /* Main container */
@@ -163,4 +166,220 @@ progress::-moz-progress-bar {
 .footer-links a:hover {
     text-decoration: underline;
 }
+
+
+/* ===============================
+   Responsive Design
+   =============================== */
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 11px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input[type="file"],
+    select {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .file-progress strong {
+        font-size: 13px;
+    }
+
+    .file-progress span {
+        font-size: 12px;
+    }
+
+    progress {
+        height: 14px;
+    }
+
+    .app-footer {
+        font-size: 12px;
+    }
+}
+
+/* Very small devices (older phones) */
+@media (max-width: 360px) {
+    h2 {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 9px;
+    }
+}
+
+
+
+/* ===============================
+   Top Navigation Bar
+   =============================== */
+
+.top-header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.navbar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+/* Logo */
+.nav-logo img {
+    height: 42px;
+    width: 46px;
+}
+
+/* Navigation links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #4f46e5;
+}
+
+/* Profile ring */
+.profile-ring {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    text-decoration: none;
+}
+
+.profile-ring img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    z-index: 2;
+}
+
+/* Circular text */
+.ring-text {
+    width: 56px;
+    height: 56px;
+    fill: #4f46e5;
+    font-size: 12px;
+    letter-spacing: 1px;
+    animation: rotateRing 12s linear infinite;
+}
+
+@keyframes rotateRing {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===============================
+   Responsive Navbar
+   =============================== */
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* hide links on small screens */
+    }
+}
+
+
+/* Make dropdown parent relative */
+.nav-links li.dropdown {
+    position: relative;
+}
+
+/* Dropdown menu hidden by default */
+.nav-links li.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(30, 58, 138, 0.5); /* Slightly transparent */
+    /* backdrop-filter: blur(8px); */
+    padding: 0.5rem 0;
+    min-width: 200px;
+    border-radius: 0.25rem;
+    z-index: 999;
+}
+
+/* Dropdown items styling */
+.nav-links li.dropdown .dropdown-menu li a {
+    padding: 0.5rem 1rem;
+    color: white;
+    display: block;
+    text-decoration: none;
+}
+
+
+/* Show dropdown on hover */
+.nav-links li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Hover effect for dropdown links */
+.nav-links li.dropdown .dropdown-menu li a:hover {
+    background-color: #4c51bf;
+    border-radius: 0.25rem;
+}
+
 
