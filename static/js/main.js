@@ -69,7 +69,9 @@ async function pollProgress(taskId, fileProgress) {
                 if (currentFile) {
                     // Find the original filename (remove the unique ID)
                     const originalNameMatch = currentFile.match(/^(.+)_[a-f0-9]{8}\.(mp4|mov|avi|mkv|webm)$/i);
-                    const displayName = originalNameMatch ? originalNameMatch[1] + originalNameMatch[2] : currentFile;
+                    // const displayName = originalNameMatch ? originalNameMatch[1] + originalNameMatch[2] : currentFile;
+                    const displayName = originalNameMatch ? `${originalNameMatch[1]}.${originalNameMatch[2]}` : currentFile;
+
                     
                     // Update all progress bars
                     for (let i = 0; i < status.total; i++) {
@@ -127,3 +129,57 @@ async function pollProgress(taskId, fileProgress) {
         }
     }, 1000); // Poll every second
 }
+
+/* ===============================
+   Mobile Dropdown Toggle (SIMPLIFIED)
+   =============================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.nav-links li.dropdown');
+    
+    // Only add click handlers on mobile
+    if (window.innerWidth <= 768) {
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            
+            link.addEventListener('click', function(e) {
+                // Only prevent default for dropdown toggles (not real links)
+                if (dropdown.classList.contains('dropdown')) {
+                    e.preventDefault();
+                    
+                    // Toggle active class
+                    const isActive = dropdown.classList.contains('active');
+                    
+                    // Close all other dropdowns
+                    dropdowns.forEach(other => {
+                        other.classList.remove('active');
+                    });
+                    
+                    // Open this one if it wasn't active
+                    if (!isActive) {
+                        dropdown.classList.add('active');
+                    }
+                    
+                    // Stop event from closing immediately
+                    e.stopPropagation();
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking anywhere else
+        document.addEventListener('click', function() {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        });
+        
+        // Keep dropdown open when clicking inside it
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    }
+});
+
+

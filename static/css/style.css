@@ -30,9 +30,9 @@ body {
 /* Title */
 h2 {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     text-align: center;
-    color: #333;
+    color: #28033e;
 }
 
 /* Inputs */
@@ -68,9 +68,10 @@ button:active {
     transform: scale(0.98);
 }
 
-/* Progress area */
+/* Progress area - FIX*/
 #progress-container {
     margin-top: 25px;
+    width: 100%;
 }
 
 .file-progress {
@@ -78,6 +79,11 @@ button:active {
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 12px;
+    word-wrap: break-word; /* Allow text to wrap */
+    overflow-wrap: break-word; /* Modern version */
+    overflow: hidden; /* Prevent overflow */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .file-progress strong {
@@ -85,7 +91,39 @@ button:active {
     margin-bottom: 6px;
     font-size: 14px;
     color: #333;
+    word-break: break-all; /* Break long filenames */
+    overflow-wrap: anywhere; /* Flexible text breaking */
 }
+
+/* Status text - NEW SECTION */
+.file-status {
+    font-size: 12px;
+    color: #666;
+    margin: 4px 0;
+    font-style: italic;
+    word-break: break-word; /* Break status text */
+}
+
+/* Progress bar container */
+.file-progress progress {
+    width: 100%;
+    max-width: 100%; /* Ensure doesn't overflow */
+    height: 18px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+}
+
+/* Percentage text */
+.file-progress span {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+    word-break: break-word;
+}
+/* End of Progress Area Fix*/
 
 /* Progress bar */
 progress {
@@ -118,27 +156,81 @@ progress::-moz-progress-bar {
     margin-top: 4px;
 }
 
-/* Downloads */
+/* Downloads FIX */
 #downloads {
     margin-top: 20px;
+    width: 100%;
+    overflow: hidden; /* Prevent container overflow */
+}
+
+#downloads h4 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
 }
 
 #downloads a {
-    display: inline-block;
-    margin-bottom: 6px;
-    color: #4f46e5;
+    display: block; /* Change from inline-block to block */
+    background: #4f46e5;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 6px;
     text-decoration: none;
+    margin: 8px 0;
+    transition: background 0.3s;
+    word-break: break-all; /* Break long URLs/filenames */
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
     font-weight: 500;
 }
 
 #downloads a:hover {
-    text-decoration: underline;
+    background: #4338ca;
+    text-decoration: none;
 }
+
+/* Style specifically for download links */
+.download-link {
+    display: block;
+    background: #4f46e5;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 8px 0;
+    transition: background 0.3s;
+    word-break: break-all;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.download-link:hover {
+    background: #4338ca;
+    text-decoration: none;
+}
+
+/* Make download links responsive */
+@media (max-width: 480px) {
+    #downloads a,
+    .download-link {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    #downloads h4 {
+        font-size: 15px;
+    }
+}
+
+/* End of Download - Fix*/
 
 
 
 /* Footer Design*/
-
 
 .app-footer {
     margin-top: 30px;
@@ -258,12 +350,13 @@ progress::-moz-progress-bar {
 }
 
 .navbar {
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 12px 20px;
+    padding: 0px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow: visible;
 }
 
 
@@ -333,15 +426,89 @@ progress::-moz-progress-bar {
 }
 
 /* ===============================
-   Responsive Navbar
+   Responsive Navbar  - Fix
    =============================== */
-
+/* Show dropdown when active on mobile */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none; /* hide links on small screens */
+    .nav-links li.dropdown.active .dropdown-menu {
+        display: block;
     }
 }
 
+@media (max-width: 768px) {
+    .nav-links li.dropdown .dropdown-menu {
+        position: relative;   /* instead of absolute */
+        background: #1e3a8a;  /* keep your styling */
+        width: 100%;          /* full width */
+        border-radius: 6px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: block; /* instead of flex */
+        gap: 8px; /* Smaller gap on mobile */
+        overflow-x: visible; /* instead of overflow-x: auto */
+        white-space: normal; /* allow wrapping */
+        padding: 5px 0;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+        /* Ensure dropdown parents don't stack */
+    .nav-links li {
+        display: inline-block;
+    }
+
+    /* Keep dropdown menus hidden until tapped */
+    .nav-links li.dropdown .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+    }
+    
+    /* Hide dropdowns on mobile by default, but allow .active class to show them */
+    .nav-links li.dropdown .dropdown-menu {
+        display: none;
+    }
+
+
+    /* Make navbar items smaller */
+    .nav-links a {
+        font-size: 12px;
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+    
+    /* Adjust navbar padding */
+    .navbar {
+        padding: 8px 5px;
+    }
+    
+    /* Make logo smaller */
+    .nav-logo img {
+        height: 32px;
+        width: 36px;
+    }
+    
+    /* Hide profile ring on very small screens */
+    @media (max-width: 480px) {
+        .profile-ring {
+            display: none;
+        }
+        
+        .nav-links {
+            gap: 6px;
+        }
+        
+        .nav-links a {
+            font-size: 11px;
+            padding: 3px 6px;
+        }
+    }
+}
+/* End of NarBar fix*/
 
 /* Make dropdown parent relative */
 .nav-links li.dropdown {
@@ -372,8 +539,10 @@ progress::-moz-progress-bar {
 
 
 /* Show dropdown on hover */
-.nav-links li.dropdown:hover .dropdown-menu {
-    display: block;
+@media (min-width: 769px) {
+    .nav-links li.dropdown:hover .dropdown-menu {
+        display: block;
+    }
 }
 
 /* Hover effect for dropdown links */
@@ -381,5 +550,7 @@ progress::-moz-progress-bar {
     background-color: #4c51bf;
     border-radius: 0.25rem;
 }
+
+
 
 
