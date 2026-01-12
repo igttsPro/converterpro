@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
     <title>Video Compressor by IGTTS</title>
-    <link rel="stylesheet" href="/static/style.css">
     <style>
         .file-progress {
             margin-bottom: 15px;
@@ -78,8 +78,8 @@
     <input type="file" id="videos" multiple accept=".mp4"><br><br>
 
     <select id="codec">
-        <option value="libx264">igtts.264 (Fast)</option>
-        <!-- <option value="libx265">H.265 (Smaller)</option> -->
+        <option value="libx264">igtts.(FastDip)</option>
+        <!-- <option value="libx265">igtts.(SlowDip)</option> -->
     </select><br><br>
 
     <button onclick="startCompression()">Compress</button>
@@ -177,6 +177,8 @@ async function startCompression() {
 }
 </script>
 
+
+<script src="/static/js/main.js"></script>
 
 </body>
 </html>
