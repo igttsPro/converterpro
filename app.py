@@ -35,3 +35,7 @@ if __name__ == "__main__":
     
     # Start Flask app
     app.run(debug=True)
+else:
+    # For Gunicorn, use app factory pattern with worker startup
+    # Or move worker startup to a separate script
+    pass
