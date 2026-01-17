@@ -109,3 +109,27 @@ def compress_video_files(task_id, filenames, codec, input_dir, output_dir):
             "file": "",
             "current": total
         })
+
+
+
+# Video Slider
+def split_video(input_path, output_path, start, end):
+    duration = float(end) - float(start)
+
+    command = [
+        "ffmpeg",
+        "-i", input_path,
+        "-ss", str(start),
+        "-t", str(duration),
+        "-c", "copy",
+        output_path
+    ]
+
+    subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    # Delete input file immediately after compression (FIX 3)
+    try:
+        os.remove(input_path)
+    except Exception as e:
+        print(f"Error deleting {input_path}: {e}")
+

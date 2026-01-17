@@ -2,9 +2,11 @@ from flask import Flask
 from config import BASE_DIR, UPLOAD_DIR, OUTPUT_DIR, STATIC_DIR
 from workers.cleanup_worker import start_cleanup_worker
 
+
 # Import blueprints
 from routes.pages import pages_bp
 from routes.compress_video import compress_bp
+from routes.split_video import split_bp
 
 def create_app():
     """Application factory function"""
@@ -19,6 +21,7 @@ def create_app():
     # Register blueprints
     app.register_blueprint(pages_bp)
     app.register_blueprint(compress_bp)
+    app.register_blueprint(split_bp)
     
     # Serve static files
     @app.route('/static/<path:path>')
@@ -34,7 +37,7 @@ if __name__ == "__main__":
     start_cleanup_worker()
     
     # Start Flask app
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=11000)
 else:
     # For Gunicorn, use app factory pattern with worker startup
     # Or move worker startup to a separate script
