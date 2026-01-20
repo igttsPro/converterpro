@@ -43,6 +43,6 @@ if __name__ == "__main__":
     # Start Flask app
     app.run(debug=True, host="0.0.0.0", port=11000)
 else:
-    # For Gunicorn, use app factory pattern with worker startup
-    # Or move worker startup to a separate script
-    pass
+    # For Gunicorn
+    app = create_app()
+    # Note: Worker startup might need to be handled differently in production
