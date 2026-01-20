@@ -7,6 +7,9 @@ from workers.cleanup_worker import start_cleanup_worker
 from routes.pages import pages_bp
 from routes.compress_video import compress_bp
 from routes.split_video import split_bp
+from routes.download_video import download_bp
+
+
 
 def create_app():
     """Application factory function"""
@@ -22,6 +25,7 @@ def create_app():
     app.register_blueprint(pages_bp)
     app.register_blueprint(compress_bp)
     app.register_blueprint(split_bp)
+    app.register_blueprint(download_bp)
     
     # Serve static files
     @app.route('/static/<path:path>')

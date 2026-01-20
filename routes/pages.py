@@ -11,7 +11,11 @@ def index():
     """Serve the main index.html page"""
     return send_from_directory(os.path.join(STATIC_DIR, 'pages'), 'index.html')
 
-# You can add more page routes here later
+# You can add more page routes here
 @pages_bp.route('/split')
 def split_page():
      return send_from_directory(os.path.join(STATIC_DIR, 'pages'), 'split.html')
+
+@pages_bp.route('/download')
+def download_page():
+     return send_from_directory(os.path.join(STATIC_DIR, 'pages'), 'download.html')
