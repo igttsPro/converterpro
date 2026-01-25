@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Video Editor – IGTTS</title>
+    <style>
+        .file-progress {
+            margin-bottom: 15px;
+        }
+        progress {
+            width: 300px;
+            height: 20px;
+        }
+        .video-placeholder {
+            position: absolute;
+            /* slightly higher than center */
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-6deg);
+            font-weight: 600;
+            /* occupy 80% of preview width/height */
+            width: 80%;
+            height: 80%;
+            /* responsive large font, bounded */
+            font-size: min(220px, 10vw);
+            /* color sampled from your screenshot with 50% opacity */
+            color: rgba(168,168,168,0.2);
+            background: transparent;
+            padding: 0;
+            border-radius: 4px;
+            pointer-events: none;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: normal;
+            line-height: 1;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+<!-- NAVBAR (full width, outside container) -->
+<header class="top-header">
+    <h2 class="enhanced-chromatic">MULTIMEDIA TOOLBOX</h2>
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="#" class="nav-logo">
+            <img src="/static/images/logo.jpg" alt="Company Logo">
+        </a>
+
+        <!-- Hamburger Menu Button (Mobile Only) -->
+        <button class="hamburger-menu" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <!-- VideoTools Dropdown -->
+            <li class="dropdown">
+                <a href="/">VideoTools &#9662;</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">Compress Video</a></li>
+                    <li><a href="/split">Split Video</a></li>
+                    <li><a href="/download">Download Video</a></li>
+                    <li><a href="/video-ops">Video Ops</a></li>
+                    <li><a href="/video-to-text">Video Voice to Text</a></li>
+                </ul>
+            </li>
+
+            <!-- Image Tools -->
+            <li class="dropdown">
+                <a href="#">ImageTools &#9662;</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/remove-image-bg">Remove ImageBground</a></li>
+                    <li><a href="/image-to-text">Image to Text</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Profile Ring -->
+        <a href="#" class="profile-ring">
+            <svg viewBox="0 0 120 120" class="ring-text">
+                <defs>
+                    <path id="circlePath"
+                          d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+                </defs>
+                <text>
+                    <textPath href="#circlePath">
+                        IGTTS • PRODUCT ARCHITECT & ENGINEER •
+                    </textPath>
+                </text>
+            </svg>
+            <img src="/static/images/profile.png" alt="Author Profile">
+        </a>
+    </nav>
+</header>
+
+<main class="main-wrapper">
+    <div class="container">
+
+        <h2>Video Editor Pro</h2>
+        <p class="custom-text">Upload a video and remix as you want, You can remove video background, 
+            add a new background video or background image, choose a background from the list available 
+            or upoload your own, remove voice from the video, add avoice from the available options or 
+            bring your own voice, you can add voice narration to you video via microphone 
+            without showing your face, clone the voice, mute the voice or extract audio to text, mp3, 
+            or any other possible format, change threshold, etc. Just remix as you wish, 
+            preview and download your edited video.</p>
+
+        <form id="bgForm">
+            <label>Video file:</label><br>
+            <input type="file" name="video_file" accept="video/*" required id="videoFile"><br>
+            <div id="videoContainer" style="position:relative; margin-top: 10px; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
+                <button id="remove-video" class="remove-video-btn" style="position:absolute; top:8px; right:8px; z-index:50; display:none;">Remove Video</button>
+                <div id="videoPlaceholder" class="video-placeholder">THEATRE</div>
+                <video id="videoPreview" width="400" height="300" controls style="display: block; position: relative; z-index:1;">
+                    Your browser does not support the video tag.
+                </video>
+                <p id="videoMessage" style="text-align: center; color: #666;">Select a video file to preview</p>
+            </div><br><br>
+
+            <label>Threshold (0–1):</label><br>
+            <input type="range" name="threshold" step="0.05" min="0" max="1" value="0.5" id="thresholdSlider"><br>
+            <span id="thresholdValue">0.5</span><br><br>
+
+            <label>Background color:</label><br>
+            <input type="color" name="background_color"><br><br>
+
+            <label>Background image:</label><br>
+            <input type="file" name="background_image" accept="image/*"><br><br>
+
+            <label>Background video:</label><br>
+            <input type="file" name="background_video" accept="video/*"><br><br>
+
+            <label>
+                <input type="checkbox" name="remove_voice" value="true">
+                Remove voice (mute audio)
+            </label><br><br>
+
+            <button type="submit">Process Video</button>
+        </form>
+
+        <div id="bgResult" style="margin-top: 20px;"></div>
+
+    </div>
+</main>
+
+<footer class="app-footer">
+    <hr>
+    <p>
+        © <span id="year"></span> : IGTTS - Your tools for everyday life
+    </p>
+    <p class="footer-links">
+        <a href="https://github.com/converterpro" target="_blank">GitHub</a>
+        .
+        <a href="#" onclick="alert('Contact: info@igtts.com')">Contact</a>
+    </p>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script src="/static/js/video_ops.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

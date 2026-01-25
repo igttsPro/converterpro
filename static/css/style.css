@@ -359,7 +359,7 @@ progress::-moz-progress-bar {
 
 .top-header h2 {
   color: #4338ca;
-  margin-top: 13px;
+  margin: 10px 0px 0px 0px;
 }
 
 .navbar {
@@ -714,4 +714,140 @@ progress::-moz-progress-bar {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+
+/* Video Editor intro text effect */
+
+.custom-text {
+    font-size: 10px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    text-align: justify;
+    color: #e0e0e0;
+    background: linear-gradient(145deg, #1a1a1a, #222);
+    line-height: 1.5;
+    padding: 1px 7px 1px 7px;
+    border-radius: 12px;
+    font-weight: 300;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+    
+    /* Smooth transitions - keep for any potential interactions */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Permanent hover effects */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Video frame border effect - now always visible */
+.custom-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #3498db, #9b59b6, #e74c3c) border-box;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    /* Permanent animation */
+    opacity: 1;
+    animation: borderRotate 3s linear infinite;
+}
+
+/* Add an extra hover effect for even more interactivity */
+.custom-text:hover {
+    transform: translateY(-8px); /* Lift a bit more on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+}
+
+@keyframes borderRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* Header text effects */
+.enhanced-chromatic {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    padding: 0px 7px 0px 7px;
+    color: white;
+    text-shadow: 
+        /* Main diagonal colors */
+        3px 3px 0 #ff0000,      /* Red */
+        -3px -3px 0 #00ff00,    /* Green */
+        3px -3px 0 #0000ff,     /* Blue */
+        -3px 3px 0 #ffff00,     /* Yellow */
+        
+        /* Additional colors for full rainbow */
+        0 4px 0 #ff7f00,        /* Orange - Bottom */
+        0 -4px 0 #8b00ff,       /* Violet - Top */
+        4px 0 0 #4b0082,        /* Indigo - Right */
+        -4px 0 0 #00ffff;       /* Cyan - Left */
+    animation: fullSpectrum 4s ease-in-out infinite;
+}
+
+@keyframes fullSpectrum {
+    0%, 100% { 
+        filter: hue-rotate(0deg);
+        text-shadow: 
+            3px 3px 0 #ff0000,
+            -3px -3px 0 #00ff00,
+            3px -3px 0 #0000ff,
+            -3px 3px 0 #ffff00,
+            0 4px 0 #ff7f00,
+            0 -4px 0 #8b00ff,
+            4px 0 0 #4b0082,
+            -4px 0 0 #00ffff;
+    }
+    25% { 
+        filter: hue-rotate(90deg);
+        text-shadow: 
+            -3px -3px 0 #ff0000,
+            3px 3px 0 #00ff00,
+            -3px 3px 0 #0000ff,
+            3px -3px 0 #ffff00,
+            4px 0 0 #ff7f00,
+            -4px 0 0 #8b00ff,
+            0 -4px 0 #4b0082,
+            0 4px 0 #00ffff;
+    }
+    50% { 
+        filter: hue-rotate(180deg);
+        text-shadow: 
+            -3px 3px 0 #ff0000,
+            3px -3px 0 #00ff00,
+            -3px -3px 0 #0000ff,
+            3px 3px 0 #ffff00,
+            0 -4px 0 #ff7f00,
+            0 4px 0 #8b00ff,
+            -4px 0 0 #4b0082,
+            4px 0 0 #00ffff;
+    }
+    75% { 
+        filter: hue-rotate(270deg);
+        text-shadow: 
+            3px -3px 0 #ff0000,
+            -3px 3px 0 #00ff00,
+            3px 3px 0 #0000ff,
+            -3px -3px 0 #ffff00,
+            -4px 0 0 #ff7f00,
+            4px 0 0 #8b00ff,
+            0 4px 0 #4b0082,
+            0 -4px 0 #00ffff;
+    }
 }

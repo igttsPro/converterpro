@@ -19,3 +19,17 @@ def split_page():
 @pages_bp.route('/download')
 def download_page():
      return send_from_directory(os.path.join(STATIC_DIR, 'pages'), 'download.html')
+
+@pages_bp.route("/ida")
+@pages_bp.route("/remove-bg")
+@pages_bp.route("/video-ops")
+@pages_bp.route("/video_ops")
+def video_ops_page():
+     return send_from_directory(os.path.join(STATIC_DIR, 'pages'), "video_ops.html")
+
+
+# @pages_bp.route("/chat")
+# def chat_page(): 
+#      return send_from_directory(PAGES_DIR, "chatbot.html") 
+     
+     

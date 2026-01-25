@@ -8,6 +8,7 @@ from routes.pages import pages_bp
 from routes.compress_video import compress_bp
 from routes.split_video import split_bp
 from routes.download_video import download_bp
+from routes.video_ops import video_ops_bp
 
 
 
@@ -26,6 +27,7 @@ def create_app():
     app.register_blueprint(compress_bp)
     app.register_blueprint(split_bp)
     app.register_blueprint(download_bp)
+    app.register_blueprint(video_ops_bp)
     
     # Serve static files
     @app.route('/static/<path:path>')
